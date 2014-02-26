@@ -11,7 +11,7 @@
     <keywords>cordova,keyboard</keywords>
 
 	<engines>
-		<engine name="cordova" version=">=3.2.0" />
+		<engine name="cordova" version=">=3.2.0-rc1" />
 	</engines>
 
     <js-module src="www/keyboard.js" name="keyboard">
