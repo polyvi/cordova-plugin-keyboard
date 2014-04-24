@@ -21,6 +21,14 @@ Properties
 
 - Keyboard.isVisible
 
+Events
+--------
+
+- Keyboard.onshow
+- Keyboard.onhide
+- Keyboard.onshowing
+- Keyboard.onhiding
+
 
 Permissions
 -----------
@@ -110,7 +118,7 @@ Keyboard.isVisible
 Determine if the keyboard is visible.
 
     if (Keyboard.isVisible) {
-    	// do something
+        // do something
     }
 
 Description
@@ -124,4 +132,104 @@ Supported Platforms
 
 - iOS
 
-    
+Keyboard.automaticScrollToTopOnHiding
+=================
+
+Specifies whenether content of page would be autoamtically scrolled to the top of the page
+when keyboard is hiding.
+
+    Keyboard.automaticScrollToTopOnHiding = true;
+
+Description
+-----------
+
+Set this to true if you need that page scroll to beginning when keyboard is hiding.
+This is allows to fix issue with elements declared with position: fixed,
+after keyboard is hiding.
+
+
+Supported Platforms
+-------------------
+
+- iOS
+
+Keyboard.onshow
+=================
+
+If defined, this function fired when keyboard fully shown.
+
+    Keyboard.onshow = function () {
+        // Describe your logic which will be run each time keyboard is shown.
+    }
+
+Description
+-----------
+
+Attach handler to this event to be able to receive notification when keyboard is shown.
+
+
+Supported Platforms
+-------------------
+
+- iOS
+
+Keyboard.onhide
+=================
+
+If defined, this function fired when keyboard fully closed.
+
+    Keyboard.onhide = function () {
+        // Describe your logic which will be run each time keyboard is closed.
+    }
+
+Description
+-----------
+
+Attach handler to this event to be able to receive notification when keyboard is closed.
+
+
+Supported Platforms
+-------------------
+
+- iOS
+
+Keyboard.onshowing
+=================
+
+If defined, this function fired before keyboard will be shown.
+
+    Keyboard.onshowing = function () {
+        // Describe your logic which will be run each time when keyboard is about to be shown.
+    }
+
+Description
+-----------
+
+Attach handler to this event to be able to receive notification when keyboard is about to be shown on the screen.
+
+
+Supported Platforms
+-------------------
+
+- iOS
+
+Keyboard.onhiding
+=================
+
+If defined, this function fired when keyboard fully closed.
+
+    Keyboard.onhiding = function () {
+        // Describe your logic which will be run each time when keyboard is about to be closed.
+    }
+
+Description
+-----------
+
+Attach handler to this event to be able to receive notification when keyboard is about to be closed.
+
+
+Supported Platforms
+-------------------
+
+- iOS
+

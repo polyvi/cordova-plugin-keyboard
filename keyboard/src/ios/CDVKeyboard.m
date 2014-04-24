@@ -69,15 +69,28 @@
                                             object:nil
                                              queue:[NSOperationQueue mainQueue]
                                         usingBlock:^(NSNotification* notification) {
-            [weakSelf.commandDelegate evalJs:@"Keyboard.isVisible = true;"];
+            [weakSelf.commandDelegate evalJs:@"Keyboard.fireOnShow();"];
             weakSelf.keyboardIsVisible = YES;
         }];
     _keyboardHideObserver = [nc addObserverForName:UIKeyboardDidHideNotification
                                             object:nil
                                              queue:[NSOperationQueue mainQueue]
                                         usingBlock:^(NSNotification* notification) {
-            [weakSelf.commandDelegate evalJs:@"Keyboard.isVisible = false;"];
+            [weakSelf.commandDelegate evalJs:@"Keyboard.fireOnHide();"];
             weakSelf.keyboardIsVisible = NO;
+        }];
+
+    _keyboardWillShowObserver = [nc addObserverForName:UIKeyboardWillShowNotification
+                                            object:nil
+                                             queue:[NSOperationQueue mainQueue]
+                                        usingBlock:^(NSNotification* notification) {
+            [weakSelf.commandDelegate evalJs:@"Keyboard.fireOnShowing();"];
+        }];
+    _keyboardWillHideObserver = [nc addObserverForName:UIKeyboardWillHideNotification
+                                            object:nil
+                                             queue:[NSOperationQueue mainQueue]
+                                        usingBlock:^(NSNotification* notification) {
+            [weakSelf.commandDelegate evalJs:@"Keyboard.fireOnHiding();"];
         }];
 }
 
@@ -280,6 +293,9 @@
     keyboardFrame = [self.viewController.view convertRect:keyboardFrame fromView:nil];
 
     CGRect newFrame = _savedWebViewFrame;
+    newFrame.size.width = self.viewController.view.bounds.size.width - _savedWebViewFrame.origin.x;
+    newFrame.size.height = self.viewController.view.bounds.size.height - _savedWebViewFrame.origin.y;
+    
     self.webView.scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     self.webView.frame = newFrame;
 }
